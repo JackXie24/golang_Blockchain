@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	firstBlockChain := blockChain.initBlockChain()
+	firstBlockChain := BlockChain.initBlockChain()
 	firstBlockChain.addBlock("This is the First Block of my first BlockChain")
 	firstBlockChain.addBlock("This is the Second Block of my first BlockChain, what purpose should my Blockchain serve")
 

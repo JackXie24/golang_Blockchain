@@ -1,6 +1,3 @@
-module /Users/jackxie/golang_blockchain/blockChain
+module github.com/JackXie24/golang_Blockchain
 
 go 1.15
-
-require (
-)
