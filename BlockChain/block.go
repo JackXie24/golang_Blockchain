@@ -15,28 +15,28 @@ type Block struct {
 	Prev_Hash []byte
 }
 
-func (b *Block) deriveHash() {
+func (b *Block) DeriveHash() {
 	info := bytes.Join([][]byte{b.Data, b.Prev_Hash}, []byte{})
 	hash := sha256.Sum256(info)
 	b.Hash = hash[:]
 }
 
-func createBlock(data string, pre_hash []byte) *Block {
+func CreateBlock(data string, pre_hash []byte) *Block {
 	block := &Block{[]byte{}, []byte(data), pre_hash}
-	block.deriveHash()
+	block.DeriveHash()
 	return block
 }
 
-func (blockChain *BlockChain) addBlock(data string) {
+func (blockChain *BlockChain) AddBlock(data string) {
 	lastBlockHash := blockChain.Blocks[len(blockChain.Blocks)-1].Hash
-	newBlock := createBlock(data, lastBlockHash)
+	newBlock := CreateBlock(data, lastBlockHash)
 	blockChain.Blocks = append(blockChain.Blocks, newBlock)
 }
 
-func genesis() *Block {
-	return createBlock("Genesis", []byte{})
+func Genesis() *Block {
+	return CreateBlock("Genesis", []byte{})
 }
 
-func initBlockChain() *BlockChain {
-	return &BlockChain{[]*Block{genesis()}}
+func InitBlockChain() *BlockChain {
+	return &BlockChain{[]*Block{Genesis()}}
 }
