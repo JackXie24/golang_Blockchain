@@ -77,8 +77,8 @@ func (cli *CommandLine) run() {
 func main() {
 	defer os.Exit(0)
 	firstBlockChain := blockchain.InitBlockChain()
-	defer firstBlockChain.Database.Close()
 
 	cli := CommandLine{firstBlockChain}
 	cli.run()
+	defer firstBlockChain.Database.Close()
 }

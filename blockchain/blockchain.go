@@ -32,6 +32,8 @@ func InitBlockChain() *BlockChain {
 			genisis := Genesis()
 			fmt.Println("Genesis Proved")
 			err = txn.Set(genisis.Hash, genisis.Serialize())
+			Handle(err)
+			err = txn.Set([]byte("lh"), genisis.Hash)
 			lastHash = genisis.Hash
 			return err
 		} else {
@@ -56,9 +58,10 @@ func (blockChain *BlockChain) AddBlock(data string) {
 		lastHash, err = item.ValueCopy(nil)
 		return err
 	})
-	Handle(err)
 
+	Handle(err)
 	newBlock := CreateBlock(data, lastHash)
+
 	err = blockChain.Database.Update(func(txn *badger.Txn) error {
 		err := txn.Set(newBlock.Hash, newBlock.Serialize())
 		Handle(err)
